@@ -1,0 +1,38 @@
+ body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .top-sidebar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #001328;
+      padding: 10px 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .top-sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      transition: background-color 0.3s;
+    }
+    .top-sidebar a:hover {
+      background-color: #001328;
+    }
+    .content {
+      padding: 100px 20px;
+    }
+    h1{
+    font-family: "Story Script",  sans-serif;
+text-align: center;
+    }
+        p, span {
+    font-family: "Coming Soon",  sans-serif;
+    }
+    body{
+        background-color: #05073f;
+        color: rgb(255, 255, 255);
+    }
