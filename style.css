@@ -46,7 +46,7 @@ p, span {
   top: 20px;
   right: 20px;
   width: 80px;
-  height: 80px;
+  height: 20px;
   z-index: 1000;
   overflow: hidden;
 }
@@ -58,3 +58,4 @@ p, span {
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
+
