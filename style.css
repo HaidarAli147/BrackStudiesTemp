@@ -40,14 +40,15 @@ text-align: center;
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 12px; /* Adjust size as needed */
+  width: auto;
+  height: 100px; /* Standard logo height */
   z-index: 1000;
 }
 
 .logo-top-right video {
-  width: 100%;
-  height: 12px;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  height: 100%;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
