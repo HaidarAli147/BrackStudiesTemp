@@ -36,18 +36,17 @@ text-align: center;
         background-color: #05073f;
         color: rgb(255, 255, 255);
 
-    }
-.video-container {
-  position: absolute;
+.logo-top-right {
+  position: fixed;
   top: 20px;
   right: 20px;
-  width: 300px;
+  width: 120px; /* Adjust size as needed */
+  z-index: 1000;
 }
 
-
-video {
-  width: 100%;         /* scales to container */
-  height: auto;        /* keeps aspect ratio */
-  border-radius: 12px; /* optional: rounded corners */
-  box-shadow: 0 0 20px rgba(0,0,0,0.3); /* optional: shadow */
+.logo-top-right video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
 }
