@@ -1,47 +1,52 @@
  body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    .top-sidebar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      background-color: #001328;
-      padding: 10px 0;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-    }
-    .top-sidebar a {
-      color: white;
-      text-decoration: none;
-      padding: 14px 20px;
-      transition: background-color 0.3s;
-    }
-    .top-sidebar a:hover {
-      background-color: #001328;
-    }
-    .content {
-      padding: 100px 20px;
-    }
-    h1{
-    font-family: "Story Script",  sans-serif;
-text-align: center;
-    }
-        p, span {
-    font-family: "Coming Soon",  sans-serif;
-    }
-    body{
-        background-color: #05073f;
-        color: rgb(255, 255, 255);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #05073f;
+  color: rgb(255, 255, 255);
+}
+
+.top-sidebar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #001328;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.top-sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 14px 20px;
+  transition: background-color 0.3s;
+}
+
+.top-sidebar a:hover {
+  background-color: #001328;
+}
+
+.content {
+  padding: 100px 20px;
+}
+
+h1 {
+  font-family: "Story Script", sans-serif;
+  text-align: center;
+}
+
+p, span {
+  font-family: "Coming Soon", sans-serif;
+}
 
 .logo-top-right {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 80px; /* Adjust width as needed */
-  height: 80px; /* Keeps it square and compact */
+  width: 80px;
+  height: 80px;
   z-index: 1000;
   overflow: hidden;
 }
@@ -49,9 +54,7 @@ text-align: center;
 .logo-top-right video {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures it fills the box without stretching */
+  object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
-
-
