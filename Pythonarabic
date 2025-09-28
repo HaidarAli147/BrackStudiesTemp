@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="./BrackStudy – Python Projects_files/f.txt"></script>
@@ -8,13 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="براك ستاديز (BrackStudies) – تعلّم بايثون من خلال أمثلة بسيطة وعملية ورؤى في الإلكترونيات.">
     <title>براك ستاديز – مشاريع بايثون</title>
-   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="https://www.brackstudy.com/logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="./BrackStudy – Python Projects_files/css2" rel="stylesheet">
-    <meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaWluIjoiaHR0cHM6Ly9nb29nbGVzeW5kaWNhdGlvbi5jb206NDQzIiwiZmVhdHVyZSI6IldlYlZpZXdYUmVxdWVzdGVkV2l0aERlcHJlY2F0aW9uIiwiZXhwaXJ5IjoxNzU4MDY3MTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZX0=="><meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoYXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"></head>
+    
+    <meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ==">
+    <meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaWluIjoiaHR0cHM6Ly9nb29nbGVzeW5kaWNhdGlvbi5jb206NDQzIiwiZmVhdHVyZSI6IldlYlZpZXdYUmVxdWVzdGVkV2l0aERlcHJlY2FhdGlvbiIsImV4cGlyeSI6MTc1ODA2NzE5OSwiaXNTdWJkb21haW4iOnRydWV9">
+    <meta http-equiv="origin-trial" content="A9nrunKdU5m96PSN1XsSGr3qOP0lvPFUB2AiAylCDlN5DTl17uDFkpQuHj1AFtgWLxpLaiBZuhrtb2WOu7ofHwEAAACKeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9">
+    <meta http-equiv="origin-trial" content="A93bovR+QVXNx2/38qDbmeYYf1wdte9EO37K9eMq3r+541qo0byhYU899BhPB7Cv9QqD7wIbR1B6OAc9kEfYCA4AAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoYXJkUGFydHkiOnRydWV9">
+    <meta http-equiv="origin-trial" content="A1S5fojrAunSDrFbD8OfGmFHdRFZymSM/1ss3G+NEttCLfHkXvlcF6LGLH8Mo5PakLO1sCASXU1/gQf6XGuTBgwAAACQeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElNdWx0aW1vZGFsSW5wdXQiLCJleHBpcnkiOjE3NzQzMTA0MDAsImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9">
+</head>
 
 <body>
 
@@ -22,23 +28,23 @@
         <a href="https://www.brackstudy.com/Indexarabic.html">الرئيسية</a>
         <a href="https://www.brackstudy.com/Pythonarabic">بايثون</a>
     </div>
-     <button 
-    onclick="window.location.href = 'Python.html';" 
-    style="
-        background-color: blue !important; 
-        color: white !important; 
-        position: fixed !important; 
-        top: 20px !important; 
-        left: 20px !important; 
-        z-index: 9999 !important; /* Forces it above everything else */
-        padding: 8px 15px; /* Makes it a good size */
-        border: 2px solid white; /* Ensures contrast */
-    ">
-    change langauge
-</button>
+    
+    <button 
+        onclick="window.location.href = 'Python.html';" 
+        style="
+            background-color: blue !important; 
+            color: white !important; 
+            position: fixed !important; 
+            top: 20px !important; 
+            left: 20px !important; 
+            z-index: 9999 !important; 
+            padding: 8px 15px; 
+            border: 2px solid white; 
+        ">
+        change langauge
+    </button>
 
-    <div class="content" dir="rtl">
-        <h1>مرحباً بك في صفحة مشاريع بايثون</h1>
+    <div class="content"> <h1>مرحباً بك في صفحة مشاريع بايثون</h1>
         <p>نحن نُنشئ محتوى للبرمجة لإظهار ما يحدث وراء الكواليس في الإلكترونيات...</p>
 
         <section class="code-section">
@@ -71,7 +77,7 @@ else:
             print(name)<br>
             print(age)<br>
             (الاسم الذي تضعه قبل علامة التساوي يسمى "متغير" (variable)، ويمكنك جعله أي شيء ما لم تكن قد استخدمته من قبل في نفس الملف.)<br>
-            is_student = "True"
+            is_student = True 
             <b>لكتابة الأعداد الصحيحة (Integers - الأرقام السالبة والموجبة) اكتب:<br>
             number_of_students = 10<br>
             speed = -120<br>
@@ -92,8 +98,7 @@ else:
             #or is_footballer = False<br>
             print(not is_player)
             print(not is_footballer)
-        </b></span>
-        <h2>المعادلات الرياضية (Math Equations)</h2>
+        </span> <h2>المعادلات الرياضية (Math Equations)</h2>
         <p>
             <b>لإجراء الجمع (addition)، اكتب:</b><br>
             print(2+2)<br>
@@ -101,8 +106,7 @@ else:
             <b>لإجراء الطرح (subtraction)، اكتب:</b><br>
             print(10-6)<br>
             <b>لإجراء الضرب (multiplication)، اكتب:</b><br>
-            (9*9)<br>
-            #تحذير: إذا استخدمت الحرف 'x' بدلاً من علامة * فلن يعمل.<br>
+            print(9*9) #تحذير: إذا استخدمت الحرف 'x' بدلاً من علامة * فلن يعمل.<br>
             <b>القسمة (Division)</b><br>
             print(28/4)<br>
             #استخدم علامة الشرطة المائلة فقط<br>
@@ -118,4 +122,7 @@ else:
         </p>
     </div>
 
-    <ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_0" name="aswift_0" browsingtopics="true" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="./BrackStudy – Python Projects_files/ads.html" data-google-container-id="a!1" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins><iframe src="./BrackStudy – Python Projects_files/aframe.html" width="0" height="0"
+    <ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;" data-ad-status="unfilled"><div id="aswift_0_host" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_0" name="aswift_0" browsingtopics="true" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;min-height:auto;max-height:none;min-width:auto;max-width:none;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="./BrackStudy – Python Projects_files/ads.html" data-google-container-id="a!1" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins>
+    <iframe src="./BrackStudy – Python Projects_files/aframe.html" width="0" height="0"></iframe>
+</body>
+</html>
