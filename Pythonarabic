@@ -22,14 +22,20 @@
         <a href="https://www.brackstudy.com/Indexarabic.html">الرئيسية</a>
         <a href="https://www.brackstudy.com/Pythonarabic">بايثون</a>
     </div>
-    
-    <button onclick="">change langauge</button>
-    <style>button { background-color: blue; color: white; }</style>
-    <script>
-        document.querySelector("button").onclick = function() {
-            window.location.href = "Python.html";
-        }
-    </script>
+     <button 
+    onclick="window.location.href = 'Python.html';" 
+    style="
+        background-color: blue !important; 
+        color: white !important; 
+        position: fixed !important; 
+        top: 20px !important; 
+        left: 20px !important; 
+        z-index: 9999 !important; /* Forces it above everything else */
+        padding: 8px 15px; /* Makes it a good size */
+        border: 2px solid white; /* Ensures contrast */
+    ">
+    change langauge
+</button>
 
     <div class="content" dir="rtl">
         <h1>مرحباً بك في صفحة مشاريع بايثون</h1>
