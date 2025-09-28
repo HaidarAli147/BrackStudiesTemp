@@ -17,9 +17,8 @@
 
 <body>
 
-    <div class="top-sidebar">
-        <a href="https://www.brackstudy.com/index.html">الصفحة الرئيسية</a>
-        <a href="https://www.brackstudy.com/Python.html">بايثون</a>
+      <a href="https://www.brackstudy.com/Indexarabic.html">البيت</a>
+    <a href="https://www.brackstudy.com/Pythonarabic">بيثون</a>
     </div>
     <button onclick=>change langauge</button>
   <style>button { background-color: blue; color: white; }</style>
