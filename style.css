@@ -1,61 +1,70 @@
- body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #05073f;
-  color: rgb(255, 255, 255);
+body {
+    margin: 0;
+    /* Changed sans-serif to a generic font for better loading */
+    font-family: Arial, sans-serif; 
+    background-color: #05073f;
+    color: rgb(255, 255, 255);
 }
 
 .top-sidebar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #001328;
-  padding: 10px 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #001328;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Added box-shadow for visual depth beneath the sidebar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
 }
 
 .top-sidebar a {
-  color: white;
-  text-decoration: none;
-  padding: 14px 20px;
-  transition: background-color 0.3s;
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    transition: background-color 0.3s;
 }
 
 .top-sidebar a:hover {
-  background-color: #001328;
+    /* Changed background color to provide visual feedback on hover */
+    background-color: #1a4261; 
 }
 
 .content {
-  padding: 100px 20px;
+    /* Adjusted padding-top to ensure content clears the fixed sidebar */
+    padding-top: 80px; 
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
 }
 
 h1 {
-  font-family: "Story Script", sans-serif;
-  text-align: center;
+    /* Changed sans-serif fallback to cursive for better stylistic match */
+    font-family: "Story Script", cursive; 
+    text-align: center;
 }
 
 p, span {
-  font-family: "Coming Soon", sans-serif;
+    /* Changed sans-serif fallback to monospace/cursive for better stylistic match */
+    font-family: "Coming Soon", monospace; 
 }
 
 .logo-top-right {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 80px;
-  height: 20px;
-  z-index: 1000;
-  overflow: hidden;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 80px;
+    height: 20px;
+    z-index: 1000;
+    overflow: hidden;
 }
 
 .logo-top-right video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
-
