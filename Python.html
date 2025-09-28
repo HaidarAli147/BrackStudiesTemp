@@ -21,14 +21,22 @@
         <a href="index.html">Home</a>
         <a href="Python.html">Python</a>
     </div>
-    <button onclick="">تغير اللغة</button>
-<style>button { background-color: blue; color: white; }</style>
-    <script>
-        document.querySelector("button").onclick = function() {
-            window.location.href = "Pythonarabic.html";
-        }
-    </script>
-
+   <button 
+    onclick="window.location.href = 'Indexarabic.html';" 
+    style="
+        background-color: blue !important; 
+        color: white !important; 
+        position: fixed !important; 
+        top: 20px !important; 
+        left: 20px !important; 
+        z-index: 9999 !important; /* Forces it above everything else */
+        padding: 8px 15px; /* Makes it a good size */
+        border: 2px solid white; /* Ensures contrast */
+    ">
+    تغير اللغة
+</button>
+<div class="top-sidebar">
+    </div>
     <div class="content">
         <h1>Welcome to the Python Projects Page</h1>
         <p>We make coding content to show what’s happening behind the scenes in electronics...</p>
@@ -113,4 +121,5 @@ else:
     </div>
 </body>
 </html>
+
 
