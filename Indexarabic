@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4397239596468716"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>دراسات براك</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <meta name="google-adsense-account" content="ca-pub-4397239596468716">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Story+Script&family=Coming+Soon&display=swap" rel="stylesheet">
+</head>
+<header>
+    <div class="language-switcher">
+        <button class="switcher-button">
+            AR
+            <span class="arrow-down">▼</span>
+        </button>
+        <div class="dropdown-content">
+            <a href="index.html">EN</a>
+            <a href="es/index.html">ES</a>
+            <a href="fr/index.html">FR</a>
+            
+            <a href="de/index.html">Deutsch</a>
+            <a href="ar/index.html">العربية</a>
+        </div>
+    </div>
+</header>
+<body>
+
+    <div class="top-sidebar">
+        <a href="ar/index.html">الصفحة الرئيسية</a>
+        <a href="ar/Python.html">بايثون</a>
+    </div>
+
+    <h1>أهلاً بك في براك ستاديز</h1>
+    <p>نحن نصنع محتوى برمجيًا لمساعدة الناس على فهم ما يحدث وراء الكواليس في أجهزتهم الإلكترونية. يوجد داخل البرمجة العديد من اللغات مثل بايثون، HTML، جافا، وجافاسكريبت.</p>
+
+    <h2>حساباتنا على وسائل التواصل الاجتماعي</h2>
+    <p>يرجى زيارة حساباتنا على وسائل التواصل الاجتماعي، فهذا سيساعدك ويساعدنا!</p>
+    <ul>
+        <li>يوتيوب: <a href="https://www.youtube.com/channel/UCtWgch_Zfmm7wp0FivfVRxQ" target="_blank">@coderalshowaikhi</a></li>
+        <li>إنستغرام: <a href="https://www.instagram.com/coderalshowaikhi/" target="_blank">@coderalshowaikhi</a></li>
+        <li>فيسبوك: <a href="https://www.facebook.com/profile.php?id=61561309017846" target="_blank">حيدر علي الشويخ</a></li>
+    </ul>
+<script src="script.js"></script>
+</div></body>
+</html>
