@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4397239596468716" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BrackStudies – Lerne Python mit einfachen, praktischen Beispielen und Einblicken in die Elektronik.">
+  <title>BrackStudy – Python-Projekte</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="logo.png">
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Story+Script&family=Coming+Soon&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="top-sidebar">
+    <a href="index.html">Startseite</a>
+    <a href="Python.html">Python</a>
+  </div>
+
+  <button 
+    onclick="window.location.href = 'Python.html';"
+    style="position: fixed; top: 60px; left: 20px; z-index: 9999; background-color: darkgreen; color: white; padding: 8px 15px; border: 2px solid white;">
+    Change langauge
+  </button>
+
+  <div class="content">
+    <h1>Willkommen auf der Python-Projektseite</h1>
+    <p>Wir erstellen Programmierinhalte, um zu zeigen, was hinter den Kulissen der Elektronik passiert...</p>
+
+    <section class="code-section">
+      <p>Python ist eine Programmiersprache, mit der man <b>Programme (Apps)</b> erstellen kann. Um etwas auszugeben:</p>
+      <code>print('hello')</code>
+
+      <p><br>Um eine Eingabe zu machen, gibt es zwei Möglichkeiten:</p>
+      <p><b>Möglichkeit Nummer eins:</b></p>
+      <code>input("Wie heißt du?")</code>
+      <p><b>Diese Methode kann nicht in einer if-Anweisung verwendet werden</b></p>
+
+      <p><b>Möglichkeit Nummer zwei:</b></p>
+      <code>i = input("Wie heißt du?")</code>
+      <p><b>Diese Methode kann in einer if-Anweisung verwendet werden</b></p>
+
+      <p>Zum Thema if-Anweisungen – so schreibt man eine:</p>
+      <pre>
+i = int(input("Wie alt bist du? "))
+if i >= 18:
+    print("Du erfüllst die Bedingungen unseres Unternehmens!")
+else:
+    print("Du erfüllst die Bedingungen unseres Unternehmens nicht, daher kannst du kein Konto erstellen!")
+      </pre>
+    </section>
+
+    <h2>Datentypen</h2>
+    <span>
+      <b>Um einen String (str) zu schreiben, also Textwerte:</b><br>
+      name = "Ali"<br>
+      age = "15"<br>
+      print(name)<br>
+      print(age)<br>
+      (Der Name vor dem Gleichheitszeichen ist eine Variable. Du kannst sie beliebig benennen, solange du den Namen nicht bereits im selben Bereich verwendet hast.)<br>
+      is_student = "True"<br>
+
+      <b>Um Ganzzahlen (positive und negative Zahlen) zu schreiben:</b><br>
+      number_of_students = 10<br>
+      speed = -120<br>
+      print(number_of_students)<br>
+      print(speed)<br>
+
+      <b>So schreibt man eine Kommazahl (float):</b><br>
+      GPA = 3.5<br>
+      bill = round(15.329, 2)<br>
+      print(bill)<br>
+      print(GPA)<br>
+
+      <b>Um einen Boolean (True oder False) zu schreiben:</b><br>
+      is_player = True<br>
+      #oder is_footballer = False<br>
+      print(is_player)<br>
+      print(is_footballer)<br>
+      (Das **Rautezeichen (#)** bedeutet, dass der folgende Code ein Kommentar ist. Der Interpreter ignoriert ihn und er wird beim Ausführen der App nicht angezeigt.)<br>
+
+      <b>Wenn du den Wert nicht ändern möchtest (True oder False), schreibe:</b><br>
+      is_player = True<br>
+      #oder is_footballer = False<br>
+      print(not is_player)<br>
+      print(not is_footballer)
+    </span>
+
+    <h2>Mathematische Gleichungen</h2>
+    <p>
+      <b>Für Addition:</b><br>
+      print(2+2)<br>
+      #Achtung: Kein Gleichheitszeichen verwenden!<br>
+
+      <b>Für Subtraktion:</b><br>
+      print(10-6)<br>
+
+      <b>Für Multiplikation:</b><br>
+      print(9*9)<br>
+      #Achtung: Der Buchstabe 'x' funktioniert nicht – verwende das Sternchen (*)<br>
+
+      <b>Für Division:</b><br>
+      print(28/4)<br>
+      #Nur den Schrägstrich verwenden<br>
+
+      <b>Für Modulo (Restwert):</b><br>
+      print(24%7)<br>
+
+      <b>Für Vergleichsoperatoren (==, !=, >, <, >=, <=):</b><br>
+      print(1 == 1)<br>
+      print(1 != 2)<br>
+      print(1 > 2)<br>
+      print(1 < 2)<br>
+      print(1 >= 2)<br>
+      print(1 <= 2)<br>
+      ("==" bedeutet gleich, "!=" ungleich, ">" größer als, "<" kleiner als, ">=" größer oder gleich, "<=" kleiner oder gleich.)
+    </p>
+  </div>
+</body>
+</html>
