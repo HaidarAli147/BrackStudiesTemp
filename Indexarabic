@@ -15,7 +15,7 @@
 </head>
 <body>
     <button 
-        onclick="window.location.href = 'Python.html';" 
+        onclick="window.location.href = 'index.html';" 
         style="
             background-color: blue !important; 
             color: white !important; 
