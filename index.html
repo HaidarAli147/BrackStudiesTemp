@@ -15,26 +15,21 @@
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="top-nav">
-            <a href="index.html">Home</a>
-            <a href="Python.html">Python</a>
-        </div>
-        <div class="language-switcher">
-            <button class="switcher-button">
-                EN
-                <span class="arrow-down">▼</span>
-            </button>
-            <div class="dropdown-content">
-                <a href="index.html">EN</a>
-                <a href="es/index.html">ES</a>
-                <a href="fr/index.html">FR</a>
-                <a href="de/index.html">Deutsch</a>
-                <a href="ar/index.html">العربية</a>
-            </div>
-        </div>
-    </header>
-
+    
+ <button 
+    onclick="window.location.href = 'arabic.html';" 
+    style="
+        background-color: blue !important; 
+        color: white !important; 
+        position: fixed !important; 
+        top: 20px !important; 
+        left: 20px !important; 
+        z-index: 9999 !important; /* Forces it above everything else */
+        padding: 8px 15px; /* Makes it a good size */
+        border: 2px solid white; /* Ensures contrast */
+    ">
+    تغير اللغة
+</button>
     <div class="content">
         <h1>Welcome to BrackStudies</h1>
         <p>We make coding content to help people understand what’s happening behind the scenes in their electronics. Inside coding, there are many languages like Python, HTML, Java, and JavaScript.</p>
@@ -51,6 +46,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
