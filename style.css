@@ -63,7 +63,7 @@ p, span {
  top: 60px;
  left: 20px;
  z-index: 9999;
- background-color: lightblue;
+ background-color: blue;
  color: white;
  padding: 8px 15px;
  border: 2px solid white;
@@ -72,6 +72,7 @@ p, span {
   transform: scale(1.15); 
  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2):
 }
+
 
 
 
