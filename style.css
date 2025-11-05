@@ -58,6 +58,16 @@ p, span {
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
+.lang {
+    background-color: #3498db; /* Default background color */
+    color: #ffffff; /* Default text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Changes the cursor to a pointer hand */
+    
+    /* Adds a smooth transition to all properties over 0.3 seconds */
+    transition: all 0.3s ease-in-out;
+}
 
 
 
