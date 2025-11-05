@@ -68,6 +68,11 @@ p, span {
  padding: 8px 15px;
  border: 2px solid white;
 }
+.lang:hover {
+  transform: scale(1.2); /* Makes the button 20% bigger on hover */
+}
+
+
 
 
 
