@@ -63,14 +63,16 @@ p, span {
  top: 60px;
  left: 20px;
  z-index: 9999;
- background-color: darkgreen;
+ background-color: lightblue;
  color: white;
  padding: 8px 15px;
  border: 2px solid white;
 }
 .lang:hover {
-  transform: scale(1.2); /* Makes the button 20% bigger on hover */
+  transform: scale(1.15); 
+ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2):
 }
+
 
 
 
