@@ -1,10 +1,12 @@
- body {
+body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #05073f;
   color: rgb(255, 255, 255);
+  overflow-x: hidden;
 }
 
+/* Top horizontal navigation bar */
 .top-sidebar {
   display: flex;
   justify-content: space-around;
@@ -25,13 +27,73 @@
 }
 
 .top-sidebar a:hover {
-  background-color: #001328;
+  background-color: #002040;
 }
 
+/* Second horizontal bar below top-sidebar */
+.second-sidebar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #002040;
+  padding: 10px 0;
+  position: fixed;
+  top: 60px; /* height of top-sidebar */
+  width: 100%;
+  z-index: 999;
+}
+
+.second-sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 12px 18px;
+  transition: background-color 0.3s;
+  font-family: "Coming Soon", sans-serif;
+}
+
+.second-sidebar a:hover {
+  background-color: #003060;
+  border-radius: 4px;
+}
+
+/* Language Toggle Button */
+.lang {
+  position: fixed;
+  top: 130px; /* Below both nav bars */
+  right: 20px;
+  padding: 10px 16px;
+  background-color: #003060;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: "Coming Soon", sans-serif;
+  cursor: pointer;
+  z-index: 1001; /* Higher than nav bars */
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.lang:hover {
+  background-color: #004080;
+}
+
+/* Main content area replaced by iframe */
+.content-frame {
+  position: absolute;
+  top: 170px; /* top-sidebar (60px) + second-sidebar (60px) + lang button (50px space) */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 170px);
+  border: none;
+  background-color: #05073f;
+  z-index: 1;
+}
+
+/* Optional fallback content styling */
 .content {
-  padding: 100px 20px;
+  padding: 180px 20px;
 }
 
+/* Typography */
 h1 {
   font-family: "Story Script", sans-serif;
   text-align: center;
@@ -41,6 +103,7 @@ p, span {
   font-family: "Coming Soon", sans-serif;
 }
 
+/* Logo in top-right corner */
 .logo-top-right {
   position: fixed;
   top: 20px;
@@ -58,25 +121,3 @@ p, span {
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
-.lang{
- position: fixed;
- top: 60px;
- left: 20px;
- z-index: 9999;
- background-color: blue;
- color: white;
- padding: 8px 15px;
- border: 2px solid white;
-}
-.lang:hover {
-  transform: scale(1.15); 
- box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2):
-}
-
-
-
-
-
-
-
-
