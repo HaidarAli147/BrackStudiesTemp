@@ -149,8 +149,8 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 11%;
+    height: 11%;
     /* KEY: Ensures the video covers the container without stretching, cropping if necessary */
     object-fit: cover; 
     /* KEY: Puts the video *behind* all other header content */
@@ -164,3 +164,4 @@ header {
     z-index: 1; /* Puts the content above the video (which is z-index: -1) */
     /* Add padding/margin as needed */
 }
+
