@@ -147,12 +147,33 @@ footer{
     /* Optional: Ensure it stays on top of other content */
     z-index: 9999; 
 }
-.message-bubble {
-  background-colour: darkslategrey:
+.message {
+  display: flex;
+  margin-bottom: 10px;
 }
-.user-message-bubble {
-   background-colour: royalblue
+
+.message.user {
+  justify-content: flex-end;
 }
+
+.message.ai {
+  justify-content: flex-start;
+}
+
+.bubble {
+  padding: 8px;
+  border-radius: 8px;
+  max-width: 70%;
+}
+
+.bubble.user {
+  background-color: #d3e0ff; /* Light Blue */
+}
+
+.bubble.ai {
+  background-color: #f0f0f0; /* Light Gray */
+}
+
 
 
 
