@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Programming Tutor Chat</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for chat history (CSS content from styles.css) */
+        #chatHistory::-webkit-scrollbar {
+            width: 8px;
+        }
+        #chatHistory::-webkit-scrollbar-thumb {
+            /* Using a muted indigo color for the scrollbar */
+            background-color: #9fa5d8;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 flex items-center justify-center">
+
+    <div class="w-full max-w-2xl bg-white shadow-2xl rounded-xl overflow-hidden flex flex-col">
+
+        <!-- Header - Changed to Indigo-700 for a deep, professional blue -->
+        <div class="p-4 bg-indigo-700 text-white text-center rounded-t-xl">
+            <h2 class="text-xl font-bold">AI Programming Tutor</h2>
+            <p class="text-sm">Ask about HTML, CSS, JavaScript, Python, Java, or Swift.</p>
+        </div>
+
+        <!-- Chat History -->
+        <div id="chatHistory" class="flex-grow overflow-y-auto space-y-4 p-4 bg-gray-50 h-96">
+            <div class="flex justify-start">
+                <!-- AI Message - Using a very light gray/blue tint -->
+                <div class="bg-gray-100 text-gray-800 p-3 rounded-xl rounded-tl-none max-w-xs shadow-sm text-sm border border-gray-200">
+                    Hello! I'm your AI tutor. How can I help you with your web and coding concepts?
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Form and Controls -->
+        <div class="p-4 border-t border-gray-200">
+            <div class="flex items-center">
+                <!-- Input focus ring changed to Indigo-500 -->
+                <input type="text" id="userInput" placeholder="Ask your question here..." 
+                       class="flex-grow p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-150"
+                       autocomplete="off">
+                <!-- Send Button - Changed to Indigo-600 -->
+                <button id="sendButton" onclick="sendMessage()" 
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-5 rounded-r-lg transition duration-150 ease-in-out disabled:opacity-50">
+                    Send
+                </button>
+            </div>
+            <!-- Loading Indicator - Changed color to match Indigo theme -->
+            <div id="loadingIndicator" class="mt-2 text-sm text-indigo-600 hidden text-center">
+                <span class="animate-pulse">AI is thinking...</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- AI Agent JavaScript Logic (Unchanged) -->
+    <script>
+        // --- API Configuration ---
+        const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
+        const apiKey = ""; // Canvas provides this automatically for the allowed model
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+
+        // --- DOM Elements ---
+        const chatHistory = document.getElementById('chatHistory');
+        const userInput = document.getElementById('userInput');
+        const sendButton = document.getElementById('sendButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        // --- State Management ---
+        // Stores the conversation history for contextual AI responses
+        const chatMessages = [];
+
+        /**
+         * Renders a new message in the chat history.
+         * @param {string} text - The message content.
+         * @param {string} sender - 'user' or 'ai'.
+         */
+        function renderMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('flex');
+
+            if (sender === 'user') {
+                messageDiv.classList.add('justify-end');
+                messageDiv.innerHTML = `
+                    <!-- User Message - Changed to Indigo-500 -->
+                    <div class="bg-indigo-500 text-white p-3 rounded-xl rounded-tr-none max-w-xs shadow-md text-sm">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                messageDiv.classList.add('justify-start');
+                messageDiv.innerHTML = `
+                    <!-- AI Message - Changed to light gray/blue with border -->
+                    <div class="bg-gray-100 text-gray-800 p-3 rounded-xl rounded-tl-none max-w-xs shadow-sm text-sm border border-gray-200">
+                        ${text}
+                    </div>
+                `;
+            }
+            chatHistory.appendChild(messageDiv);
+            chatHistory.scrollTop = chatHistory.scrollHeight; // Auto-scroll to bottom
+        }
+
+        /**
+         * Core function to call the Gemini API with exponential backoff for handling rate limits (429).
+         * @param {object} payload - The request payload containing the conversation and system instructions.
+         * @param {number} attempt - Current retry attempt (starts at 0).
+         */
+        async function fetchWithBackoff(payload, attempt = 0) {
+            const maxRetries = 5;
+            const delay = Math.pow(2, attempt) * 1000; // Exponential delay (1s, 2s, 4s, ...)
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Handle Too Many Requests (429) by retrying with exponential backoff
+                if (!response.ok && response.status === 429 && attempt < maxRetries) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(payload, attempt + 1);
+                }
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                return response.json();
+
+            } catch (error) {
+                // Handle other temporary network/fetch errors by retrying
+                if (attempt < maxRetries) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(payload, attempt + 1);
+                }
+                throw new Error(`Failed to fetch content after ${maxRetries} attempts: ${error.message}`);
+            }
+        }
+
+        /**
+         * Handles sending the user's message and getting the AI response.
+         * This function is called by the "Send" button and the Enter key listener.
+         */
+        async function sendMessage() {
+            const query = userInput.value.trim();
+            if (!query) return;
+
+            // 1. Display user message and update UI state
+            renderMessage(query, 'user');
+            userInput.value = ''; // Clear input
+            sendButton.disabled = true;
+            loadingIndicator.classList.remove('hidden');
+
+            // 2. Add user message to history for multi-turn conversation context
+            chatMessages.push({ role: "user", parts: [{ text: query }] });
+
+            // 3. Construct the API payload
+            const payload = {
+                contents: chatMessages,
+                systemInstruction: {
+                    parts: [{ text: "You are a helpful programming tutor. Be concise and focus on the topics of HTML, CSS, JavaScript, Python, Java, and Swift." }]
+                }
+            };
+
+            try {
+                // 4. Call the Gemini API
+                const result = await fetchWithBackoff(payload);
+
+                // 5. Extract the AI's response text
+                const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (aiText) {
+                    // 6. Display AI response and update history
+                    renderMessage(aiText, 'ai');
+                    chatMessages.push({ role: "model", parts: [{ text: aiText }] });
+                } else {
+                    renderMessage("Sorry, I received an empty or invalid response from the AI model.", 'ai');
+                }
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                renderMessage("Error: Could not connect to the AI agent. Please check the console for details.", 'ai');
+            } finally {
+                // 7. Reset UI state
+                sendButton.disabled = false;
+                loadingIndicator.classList.add('hidden');
+            }
+        }
+
+        // Allow sending message on Enter key press
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !sendButton.disabled) {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
