@@ -131,7 +131,7 @@ footer{
     position: fixed; 
     
     /* 2. Pin it to the Top-Left */
-    top: 50px;    /* 10 pixels down from the top edge */
+    top: 250px;    /* 10 pixels down from the top edge */
     left: 10px;   /* 10 pixels right from the left edge */
     
     /* 3. Define the Size (Example: 80x80 pixels) */
@@ -147,6 +147,7 @@ footer{
     /* Optional: Ensure it stays on top of other content */
     z-index: 1000; 
 }
+
 
 
 
