@@ -7,20 +7,18 @@
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="stylesheet" href="/style.css">
   <meta name="google-adsense-account" content="ca-pub-4397239596468716">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Story+Script&family=Coming+Soon&display=swap" rel="stylesheet">
 </head>
 <body>
 
-   <video id="logo-video" autoplay loop muted playsinline>
-      <source src="/logo.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+  <video id="logo-video" autoplay loop muted playsinline>
+    <source src="/logo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-    
-  <button class="lang"
-    onclick="window.location.href = '/index.html';">
+  <button class="lang" onclick="window.location.href = '/index.html';">
     تغير اللغة
   </button>
 
@@ -34,200 +32,149 @@
 
   <!-- Main Content -->
   <div class="content">
-    
-    
     <div id="chatContainer">
 
-      
-        
-        <!-- Header -->
-        <div id="header">
-            <h2>AI Programming Tutor</h2>
-            <p>Ask about HTML, CSS, JavaScript, Python, Java, or Swift.</p>
-        </div>
+      <!-- Header -->
+      <div id="header">
+        <h2>AI Programming Tutor</h2>
+        <p>Ask about HTML, CSS, JavaScript, Python, Java, or Swift.</p>
+      </div>
 
-        <!-- Chat History -->
-       
-        </style>
-        <div id="chatHistory" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
-            <div id="initialMessage">
-                <div>
-                    Hello! I'm your AI tutor. How can I help you with your web and coding concepts?
-                </div>
-            </div>
+      <!-- Chat History -->
+      <div id="chatHistory" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+        <div id="initialMessage">
+          <div class="bubble ai">
+            Hello! I'm your AI tutor. How can I help you with your web and coding concepts?
+          </div>
         </div>
+      </div>
 
-        <!-- Input Form and Controls -->
-        <div id="inputControls" style="padding: 10px; border-top: 1px solid #ccc;">
-            <div id="inputWrapper" style="display: flex;">
-                <input type="text" id="userInput" placeholder="Ask your question here..." 
-                       style="flex-grow: 1; padding: 5px; border: 1px solid #ccc;"
-                       autocomplete="off">
-                <button id="sendButton" onclick="sendMessage()" style="padding: 5px 10px;">
-                    Send
-                </button>
-            </div>
-            <!-- Loading Indicator -->
-            <div id="loadingIndicator" style="margin-top: 5px; color: #333; display: none;">
-                <span>AI is thinking...</span>
-            </div>
+      <!-- Input Form and Controls -->
+      <div id="inputControls" style="padding: 10px; border-top: 1px solid #ccc;">
+        <div id="inputWrapper" style="display: flex;">
+          <input type="text" id="userInput" placeholder="Ask your question here..."
+                 style="flex-grow: 1; padding: 5px; border: 1px solid #ccc;" autocomplete="off">
+          <button id="sendButton" onclick="sendMessage()" style="padding: 5px 10px;">
+            Send
+          </button>
         </div>
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" style="margin-top: 5px; color: #333; display: none;">
+          <span>AI is thinking...</span>
+        </div>
+      </div>
 
     </div>
 
     <!-- AI Agent JavaScript Logic -->
     <script>
-        // --- API Configuration ---
-        const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
-        // The API Key has been updated based on the user's request.
-        const apiKey = "AIzaSyCB5HJXCxiTUjJgEFHHa6CWo6iCOWjwKGg"; 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+      const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
+      const apiKey = "AIzaSyCB5HJXCxiTUjJgEFHHa6CWo6iCOWjwKGg"; 
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
 
-        // --- DOM Elements ---
-        const chatHistory = document.getElementById('chatHistory');
-        const userInput = document.getElementById('userInput');
-        const sendButton = document.getElementById('sendButton');
-        const loadingIndicator = document.getElementById('loadingIndicator');
+      const chatHistory = document.getElementById('chatHistory');
+      const userInput = document.getElementById('userInput');
+      const sendButton = document.getElementById('sendButton');
+      const loadingIndicator = document.getElementById('loadingIndicator');
 
-        // --- State Management ---
-        // Stores the conversation history for contextual AI responses
-        const chatMessages = [];
+      const chatMessages = [];
 
-        /**
-         * Renders a new message in the chat history, using minimal inline styling for separation.
-         * @param {string} text - The message content.
-         * @param {string} sender - 'user' or 'ai'.
-         */
-        function renderMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.style.marginBottom = '10px';
-            messageDiv.style.display = 'flex';
-            
-            const contentDiv = document.createElement('div');
-            contentDiv.style.padding = '8px';
-            contentDiv.style.borderRadius = '8px';
-            contentDiv.style.maxWidth = '70%';
+      // Render message with classes instead of inline styles
+      function renderMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender);
 
-            if (sender === 'user') {
-                messageDiv.style.justifyContent = 'flex-end';
-                contentDiv.style.backgroundColor = '#d3e0ff'; // Light Blue
-                contentDiv.style.marginLeft = 'auto';
-            } else {
-                messageDiv.style.justifyContent = 'flex-start';
-                contentDiv.style.backgroundColor = '#f0f0f0'; // Light Gray
-                contentDiv.style.marginRight = 'auto';
-            }
-            
-            contentDiv.textContent = text;
-            messageDiv.appendChild(contentDiv);
-            chatHistory.appendChild(messageDiv);
-            chatHistory.scrollTop = chatHistory.scrollHeight; // Auto-scroll to bottom
+        const contentDiv = document.createElement('div');
+        contentDiv.classList.add('bubble', sender);
+        contentDiv.textContent = text;
+
+        messageDiv.appendChild(contentDiv);
+        chatHistory.appendChild(messageDiv);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      }
+
+      // Replace initial message with styled bubble
+      const initialMessageDiv = document.getElementById('initialMessage');
+      if (initialMessageDiv) {
+        initialMessageDiv.remove();
+        renderMessage("Hello! I'm your AI tutor. How can I help you with your web and coding concepts?", 'ai');
+      }
+
+      async function fetchWithBackoff(payload, attempt = 0) {
+        const maxRetries = 5;
+        const delay = Math.pow(2, attempt) * 1000;
+
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok && response.status === 429 && attempt < maxRetries) {
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return fetchWithBackoff(payload, attempt + 1);
+          }
+
+          if (!response.ok) {
+            throw new Error(`API Error: ${response.statusText}`);
+          }
+
+          return response.json();
+
+        } catch (error) {
+          if (attempt < maxRetries) {
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return fetchWithBackoff(payload, attempt + 1);
+          }
+          throw new Error(`Failed after ${maxRetries} attempts: ${error.message}`);
         }
+      }
 
-        // Remove the initial styled message and replace it with the new unstyled version if it exists
-        const initialMessageDiv = document.getElementById('initialMessage');
-        if (initialMessageDiv) {
-            initialMessageDiv.remove();
-            renderMessage("Hello! I'm your AI tutor. How can I help you with your web and coding concepts?", 'ai');
+      async function sendMessage() {
+        const query = userInput.value.trim();
+        if (!query) return;
+
+        renderMessage(query, 'user');
+        userInput.value = '';
+        sendButton.disabled = true;
+        loadingIndicator.style.display = 'block';
+
+        chatMessages.push({ role: "user", parts: [{ text: query }] });
+
+        const payload = {
+          contents: chatMessages,
+          systemInstruction: {
+            parts: [{ text: "You are a helpful programming tutor. Be concise and focus on HTML, CSS, JavaScript, Python, Java, and Swift." }]
+          }
+        };
+
+        try {
+          const result = await fetchWithBackoff(payload);
+          const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+          if (aiText) {
+            renderMessage(aiText, 'ai');
+            chatMessages.push({ role: "model", parts: [{ text: aiText }] });
+          } else {
+            renderMessage("Sorry, I received an empty or invalid response from the AI model.", 'ai');
+          }
+
+        } catch (error) {
+          console.error("Gemini API Error:", error);
+          renderMessage("Error: Could not connect to the AI agent. Please check the console for details.", 'ai');
+        } finally {
+          sendButton.disabled = false;
+          loadingIndicator.style.display = 'none';
         }
+      }
 
-
-        /**
-         * Core function to call the Gemini API with exponential backoff for handling rate limits (429).
-         * @param {object} payload - The request payload containing the conversation and system instructions.
-         * @param {number} attempt - Current retry attempt (starts at 0).
-         */
-        async function fetchWithBackoff(payload, attempt = 0) {
-            const maxRetries = 5;
-            const delay = Math.pow(2, attempt) * 1000; // Exponential delay (1s, 2s, 4s, ...)
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                // Handle Too Many Requests (429) by retrying with exponential backoff
-                if (!response.ok && response.status === 429 && attempt < maxRetries) {
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    return fetchWithBackoff(payload, attempt + 1);
-                }
-
-                if (!response.ok) {
-                    throw new Error(`API Error: ${response.statusText}`);
-                }
-
-                return response.json();
-
-            } catch (error) {
-                // Handle other temporary network/fetch errors by retrying
-                if (attempt < maxRetries) {
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    return fetchWithBackoff(payload, attempt + 1);
-                }
-                throw new Error(`Failed to fetch content after ${maxRetries} attempts: ${error.message}`);
-            }
+      userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !sendButton.disabled) {
+          sendMessage();
         }
-
-        /**
-         * Handles sending the user's message and getting the AI response.
-         * This function is called by the "Send" button and the Enter key listener.
-         */
-        async function sendMessage() {
-            const query = userInput.value.trim();
-            if (!query) return;
-
-            // 1. Display user message and update UI state
-            renderMessage(query, 'user');
-            userInput.value = ''; // Clear input
-            sendButton.disabled = true;
-            loadingIndicator.style.display = 'block';
-
-            // 2. Add user message to history for multi-turn conversation context
-            chatMessages.push({ role: "user", parts: [{ text: query }] });
-
-            // 3. Construct the API payload
-            const payload = {
-                contents: chatMessages,
-                systemInstruction: {
-                    parts: [{ text: "You are a helpful programming tutor. Be concise and focus on the topics of HTML, CSS, JavaScript, Python, Java, and Swift." }]
-                }
-            };
-
-            try {
-                // 4. Call the Gemini API
-                const result = await fetchWithBackoff(payload);
-
-                // 5. Extract the AI's response text
-                const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                if (aiText) {
-                    // 6. Display AI response and update history
-                    renderMessage(aiText, 'ai');
-                    chatMessages.push({ role: "model", parts: [{ text: aiText }] });
-                } else {
-                    renderMessage("Sorry, I received an empty or invalid response from the AI model.", 'ai');
-                }
-
-            } catch (error) {
-                console.error("Gemini API Error:", error);
-                renderMessage("Error: Could not connect to the AI agent. Please check the console for details.", 'ai');
-            } finally {
-                // 7. Reset UI state
-                sendButton.disabled = false;
-                loadingIndicator.style.display = 'none';
-            }
-        }
-
-        // Allow sending message on Enter key press
-        userInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && !sendButton.disabled) {
-                sendMessage();
-            }
-        });
+      });
     </script>
   </div>
-
 </body>
 </html>
