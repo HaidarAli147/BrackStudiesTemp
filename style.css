@@ -167,12 +167,13 @@ footer{
 }
 
 .bubble.user {
-  background-color: #d3e0ff; /* Light Blue */
+  background-color: #4169E1; /* Light Blue */
 }
 
 .bubble.ai {
-  background-color: #f0f0f0; /* Light Gray */
+  background-color: #5A5559; /* Light Gray */
 }
+
 
 
 
