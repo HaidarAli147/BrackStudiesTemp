@@ -147,6 +147,13 @@ footer{
     /* Optional: Ensure it stays on top of other content */
     z-index: 9999; 
 }
+.message-bubble {
+  background-colour: darkslategrey:
+}
+.user-message-bubble {
+   background-colour: royalblue
+}
+
 
 
 
