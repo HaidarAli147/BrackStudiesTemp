@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>براك للدراسة</title>
+  <title>برك ستدي</title>
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="stylesheet" href="/style.css">
   <meta name="google-adsense-account" content="ca-pub-4397239596468716">
@@ -15,55 +15,62 @@
 
   <video id="logo-video" autoplay loop muted playsinline>
     <source src="/logo.mp4" type="video/mp4">
-    متصفحك لا يدعم وسم الفيديو.
+    متصفحك لا يدعم تشغيل الفيديو.
   </video>
 
-  <button class="lang" onclick="window.location.href = '/ar/index.html';">
+  <button class="lang" onclick="window.location.href = '/index.html';">
     تغيير اللغة
   </button>
 
+  <!-- شريط التنقل -->
   <div class="top-sidebar">
-    <a href="/index.html">الصفحة الرئيسية</a>
+    <a href="/ar/index.html">الرئيسية</a>
     <a href="/ar/python.html">بايثون</a>
-    <a href="/ar/Website.html">تطوير المواقع</a>
+    <a href="/ar/Website.html">موقع</a>
     <a href="/ar/ai.html">وكيل الذكاء الاصطناعي</a>
   </div>
 
+  <!-- المحتوى الرئيسي -->
   <div class="content">
     <div id="chatContainer">
 
+      <!-- العنوان -->
       <div id="header">
         <h2>مدرس البرمجة بالذكاء الاصطناعي</h2>
         <p>اسأل عن HTML، CSS، JavaScript، Python، Java، أو Swift.</p>
       </div>
 
-      <div id="chatHistory" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; text-align: right;">
+      <!-- سجل المحادثة -->
+      <div id="chatHistory" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
         <div id="initialMessage">
           <div class="bubble ai">
-            مرحباً! أنا مدرسك بالذكاء الاصطناعي. كيف يمكنني مساعدتك في مفاهيم الويب والبرمجة؟
+            مرحباً! أنا مدرسك بالذكاء الاصطناعي. كيف أساعدك في مفاهيم الويب والبرمجة؟
           </div>
         </div>
       </div>
 
+      <!-- إدخال الرسائل -->
       <div id="inputControls" style="padding: 10px; border-top: 1px solid #ccc;">
         <div id="inputWrapper" style="display: flex;">
+          <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..."
+                 style="flex-grow: 1; padding: 5px; border: 1px solid #ccc;" autocomplete="off">
           <button id="sendButton" onclick="sendMessage()" style="padding: 5px 10px;">
             إرسال
           </button>
-          <input type="text" id="userInput" placeholder="اطرح سؤالك هنا..."
-                 style="flex-grow: 1; padding: 5px; border: 1px solid #ccc; text-align: right;" autocomplete="off">
         </div>
-        <div id="loadingIndicator" style="margin-top: 5px; color: #333; display: none; text-align: right;">
+        <!-- مؤشر التحميل -->
+        <div id="loadingIndicator" style="margin-top: 5px; color: #333; display: none;">
           <span>الذكاء الاصطناعي يفكر...</span>
         </div>
       </div>
 
     </div>
 
+    <!-- منطق الجافاسكربت -->
     <script>
       const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
       const apiKey = "AIzaSyCB5HJXCxiTUjJgEFHHa6CWo6iCOWjwKGg"; 
-      const apiUrl = \`https://generativelanguage.googleapis.com/v1beta/models/\${MODEL_NAME}:generateContent?key=\${apiKey}\`;
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
 
       const chatHistory = document.getElementById('chatHistory');
       const userInput = document.getElementById('userInput');
@@ -72,12 +79,10 @@
 
       const chatMessages = [];
 
-      // Render message with classes instead of inline styles
+      // عرض الرسائل مع الكلاسات
       function renderMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sender);
-        // Add text alignment for RTL (You might need to adjust CSS styles too)
-        messageDiv.style.textAlign = sender === 'user' ? 'right' : 'right'; 
 
         const contentDiv = document.createElement('div');
         contentDiv.classList.add('bubble', sender);
@@ -88,11 +93,11 @@
         chatHistory.scrollTop = chatHistory.scrollHeight;
       }
 
-      // Replace initial message with styled bubble
+      // استبدال الرسالة الأولية
       const initialMessageDiv = document.getElementById('initialMessage');
       if (initialMessageDiv) {
         initialMessageDiv.remove();
-        renderMessage("مرحباً! أنا مدرسك بالذكاء الاصطناعي. كيف يمكنني مساعدتك في مفاهيم الويب والبرمجة؟", 'ai');
+        renderMessage("مرحباً! أنا مدرسك بالذكاء الاصطناعي. كيف أساعدك في مفاهيم الويب والبرمجة؟", 'ai');
       }
 
       async function fetchWithBackoff(payload, attempt = 0) {
@@ -112,7 +117,7 @@
           }
 
           if (!response.ok) {
-            throw new Error(\`API Error: \${response.statusText}\`);
+            throw new Error(`خطأ في API: ${response.statusText}`);
           }
 
           return response.json();
@@ -122,7 +127,7 @@
             await new Promise(resolve => setTimeout(resolve, delay));
             return fetchWithBackoff(payload, attempt + 1);
           }
-          throw new Error(\`Failed after \${maxRetries} attempts: \${error.message}\`);
+          throw new Error(`فشل بعد ${maxRetries} محاولة: ${error.message}`);
         }
       }
 
@@ -140,7 +145,7 @@
         const payload = {
           contents: chatMessages,
           systemInstruction: {
-            parts: [{ text: "أنت مدرس برمجة مفيد. كن موجزاً وركز على HTML و CSS و JavaScript و Python و Java و Swift. أجب باللغة العربية." }]
+            parts: [{ text: "أنت مدرس برمجة مساعد. كن موجزاً وركز على HTML، CSS، JavaScript، Python، Java، و Swift." }]
           }
         };
 
@@ -152,12 +157,12 @@
             renderMessage(aiText, 'ai');
             chatMessages.push({ role: "model", parts: [{ text: aiText }] });
           } else {
-            renderMessage("عذراً، لقد تلقيت استجابة فارغة أو غير صالحة من نموذج الذكاء الاصطناعي.", 'ai');
+            renderMessage("عذراً، لم أتلقَ استجابة صالحة من النموذج.", 'ai');
           }
 
         } catch (error) {
-          console.error("Gemini API Error:", error);
-          renderMessage("خطأ: لم نتمكن من الاتصال بوكيل الذكاء الاصطناعي. يرجى التحقق من وحدة التحكم (Console) للحصول على التفاصيل.", 'ai');
+          console.error("خطأ في API:", error);
+          renderMessage("خطأ: لم أتمكن من الاتصال بوكيل الذكاء الاصطناعي. تحقق من وحدة التحكم.", 'ai');
         } finally {
           sendButton.disabled = false;
           loadingIndicator.style.display = 'none';
