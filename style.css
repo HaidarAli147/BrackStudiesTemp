@@ -125,43 +125,27 @@ footer{
   color: white;
 }
 
-/* --- Header Styling --- */
-header {
-    /* KEY: Needed to contain the absolutely positioned video */
-    position: relative;
-    /* Set a visible height for the header */
-    height: 60vh; 
-    /* Hide anything that exceeds the header boundaries */
-    overflow: hidden; 
-
-    /* Styling for the content over the video (optional) */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white; /* Make the text readable against a dark video */
-    text-align: center;
-}
-
-/* --- Video Styling --- */
-.header-video {
-    /* KEY: Position the video to cover the entire header */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 11%;
-    height: 11%;
-    /* KEY: Ensures the video covers the container without stretching, cropping if necessary */
+/* --- Small Square Logo Video Styling --- */
+#logo-video {
+    /* 1. KEY: Puts the element in a specific position relative to the browser window */
+    position: fixed; 
+    
+    /* 2. Pin it to the Top-Left */
+    top: 10px;    /* 10 pixels down from the top edge */
+    left: 10px;   /* 10 pixels right from the left edge */
+    
+    /* 3. Define the Size (Example: 80x80 pixels) */
+    width: 80px;
+    height: 80px;
+    
+    /* 4. Ensure it maintains a square aspect ratio and doesn't stretch the video */
     object-fit: cover; 
-    /* KEY: Puts the video *behind* all other header content */
-    z-index: -1; 
+    
+    /* Optional: Give it a nice rounded corner look */
+    border-radius: 10px; 
+    
+    /* Optional: Ensure it stays on top of other content */
+    z-index: 1000; 
 }
 
-/* --- Content Over Video Styling --- */
-.header-content {
-    /* Ensures the overlay content is clearly visible */
-    position: relative; 
-    z-index: 1; /* Puts the content above the video (which is z-index: -1) */
-    /* Add padding/margin as needed */
-}
 
