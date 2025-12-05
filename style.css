@@ -145,8 +145,9 @@ footer{
     border-radius: 10px; 
     
     /* Optional: Ensure it stays on top of other content */
-    z-index: 1000; 
+    z-index: 9999; 
 }
+
 
 
 
