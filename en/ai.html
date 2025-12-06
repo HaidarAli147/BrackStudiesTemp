@@ -11,7 +11,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Story+Script&family=Coming+Soon&display=swap" rel="stylesheet">
+  <link href="fonts.googleapis.com" rel="stylesheet">
 </head>
 <body>
 
@@ -70,11 +70,10 @@
 
     </div>
 
-    <!-- AI Agent JavaScript Logic -->
+    <!-- AI Agent JavaScript Logic (Points to your secure backend) -->
     <script>
-      const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
-      const apiKey = "GEMINI_API_KEY";
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+      // The URL of your secure backend server endpoint
+      const PROXY_SERVER_URL = 'http://localhost:3000/api/tutor'; 
 
       const chatHistory = document.getElementById('chatHistory');
       const userInput = document.getElementById('userInput');
@@ -93,7 +92,7 @@
         contentDiv.textContent = text;
 
         messageDiv.appendChild(contentDiv);
-        chatHistory.appendChild(messageDiv);
+        chatHistory.appendChild(contentDiv); // Append contentDiv directly
         chatHistory.scrollTop = chatHistory.scrollHeight;
       }
 
@@ -102,40 +101,6 @@
       if (initialMessageDiv) {
         initialMessageDiv.remove();
         renderMessage("Hello! I'm your AI tutor. How can I help you with your web and coding concepts?", 'ai');
-      }
-
-      // Retry logic
-      async function fetchWithBackoff(payload, attempt = 0) {
-        const maxRetries = 5;
-        const delay = Math.pow(2, attempt) * 1000;
-
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-
-          if (!response.ok) {
-            const errorText = await response.text();
-            console.error("API Error:", response.status, errorText);
-
-            if (response.status === 429 && attempt < maxRetries) {
-              await new Promise(resolve => setTimeout(resolve, delay));
-              return fetchWithBackoff(payload, attempt + 1);
-            }
-            throw new Error(`API Error: ${response.statusText}`);
-          }
-
-          return response.json();
-
-        } catch (error) {
-          if (attempt < maxRetries) {
-            await new Promise(resolve => setTimeout(resolve, delay));
-            return fetchWithBackoff(payload, attempt + 1);
-          }
-          throw new Error(`Failed after ${maxRetries} attempts: ${error.message}`);
-        }
       }
 
       // Send message
@@ -148,27 +113,27 @@
         sendButton.disabled = true;
         loadingIndicator.style.display = 'block';
 
-        const payload = {
-          contents: [{ role: "user", parts: [{ text: query }] }],
-          systemInstruction: {
-            parts: [{ text: "You are a helpful programming tutor. Be concise and focus on HTML, CSS, JavaScript, Python, Java, and Swift." }]
-          }
-        };
-
         try {
-          const result = await fetchWithBackoff(payload);
+          // Fetch from YOUR secure server proxy
+          const response = await fetch(PROXY_SERVER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: query }) 
+          });
+
+          if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+          }
+
+          const result = await response.json();
           console.log("API raw result:", result);
 
           const aiText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
           renderMessage(aiText || "Sorry, I received an empty or invalid response from the AI model.", 'ai');
 
-          if (aiText) {
-            chatMessages.push({ role: "model", parts: [{ text: aiText }] });
-          }
-
         } catch (error) {
-          console.error("Gemini API Error:", error);
-          renderMessage("Error: Could not connect to the AI agent. Please check the console for details.", 'ai');
+          console.error("Fetch Error:", error);
+          renderMessage("Error: Could not connect to the AI agent. Please ensure the backend server is running and accessible.", 'ai');
         } finally {
           sendButton.disabled = false;
           loadingIndicator.style.display = 'none';
