@@ -7,17 +7,21 @@
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="stylesheet" href="/style.css">
   <meta name="google-adsense-account" content="ca-pub-4397239596468716">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Story+Script&family=Coming+Soon&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <!-- Logo video -->
   <video id="logo-video" autoplay loop muted playsinline>
     <source src="/logo.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
+  <!-- Language button -->
   <button class="lang" onclick="window.location.href = '/index.html';">
     تغير اللغة
   </button>
@@ -69,7 +73,7 @@
     <!-- AI Agent JavaScript Logic -->
     <script>
       const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
-      const apiKey = "AIzaSyCB5HJXCxiTUjJgEFHHa6CWo6iCOWjwKGg"; 
+      const apiKey = "AIzaSyCB5HJXCxiTUjJgEFHHa6CWo6iCOWjwKGg";
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
 
       const chatHistory = document.getElementById('chatHistory');
@@ -79,7 +83,7 @@
 
       const chatMessages = [];
 
-      // Render message with classes instead of inline styles
+      // Render message
       function renderMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sender);
@@ -93,13 +97,14 @@
         chatHistory.scrollTop = chatHistory.scrollHeight;
       }
 
-      // Replace initial message with styled bubble
+      // Replace initial message
       const initialMessageDiv = document.getElementById('initialMessage');
       if (initialMessageDiv) {
         initialMessageDiv.remove();
         renderMessage("Hello! I'm your AI tutor. How can I help you with your web and coding concepts?", 'ai');
       }
 
+      // Retry logic
       async function fetchWithBackoff(payload, attempt = 0) {
         const maxRetries = 5;
         const delay = Math.pow(2, attempt) * 1000;
@@ -111,12 +116,14 @@
             body: JSON.stringify(payload)
           });
 
-          if (!response.ok && response.status === 429 && attempt < maxRetries) {
-            await new Promise(resolve => setTimeout(resolve, delay));
-            return fetchWithBackoff(payload, attempt + 1);
-          }
-
           if (!response.ok) {
+            const errorText = await response.text();
+            console.error("API Error:", response.status, errorText);
+
+            if (response.status === 429 && attempt < maxRetries) {
+              await new Promise(resolve => setTimeout(resolve, delay));
+              return fetchWithBackoff(payload, attempt + 1);
+            }
             throw new Error(`API Error: ${response.statusText}`);
           }
 
@@ -131,6 +138,7 @@
         }
       }
 
+      // Send message
       async function sendMessage() {
         const query = userInput.value.trim();
         if (!query) return;
@@ -140,10 +148,8 @@
         sendButton.disabled = true;
         loadingIndicator.style.display = 'block';
 
-        chatMessages.push({ role: "user", parts: [{ text: query }] });
-
         const payload = {
-          contents: chatMessages,
+          contents: [{ role: "user", parts: [{ text: query }] }],
           systemInstruction: {
             parts: [{ text: "You are a helpful programming tutor. Be concise and focus on HTML, CSS, JavaScript, Python, Java, and Swift." }]
           }
@@ -151,13 +157,13 @@
 
         try {
           const result = await fetchWithBackoff(payload);
-          const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+          console.log("API raw result:", result);
+
+          const aiText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+          renderMessage(aiText || "Sorry, I received an empty or invalid response from the AI model.", 'ai');
 
           if (aiText) {
-            renderMessage(aiText, 'ai');
             chatMessages.push({ role: "model", parts: [{ text: aiText }] });
-          } else {
-            renderMessage("Sorry, I received an empty or invalid response from the AI model.", 'ai');
           }
 
         } catch (error) {
@@ -169,6 +175,7 @@
         }
       }
 
+      // Enter key support
       userInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && !sendButton.disabled) {
           sendMessage();
