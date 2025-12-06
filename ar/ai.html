@@ -7,26 +7,30 @@
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="stylesheet" href="/style.css">
   <meta name="google-adsense-account" content="ca-pub-4397239596468716">
+
+  <!-- خطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Story+Script&family=Coming+Soon&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <!-- فيديو الشعار -->
   <video id="logo-video" autoplay loop muted playsinline>
     <source src="/logo.mp4" type="video/mp4">
     متصفحك لا يدعم تشغيل الفيديو.
   </video>
 
+  <!-- زر تغيير اللغة -->
   <button class="lang" onclick="window.location.href = '/en/index.html';">
-    Change Langauge
+    Change Language
   </button>
 
   <!-- شريط التنقل -->
   <div class="top-sidebar">
-    <a href="/index.html">الرئيسية</a>
+    <a href="/ar/index.html">الرئيسية</a>
     <a href="/ar/python.html">بايثون</a>
-    <a href="/ar/Website.html">موقع</a>
+    <a href="/ar/website.html">موقع إلكتروني</a>
     <a href="/ar/ai.html">وكيل الذكاء الاصطناعي</a>
   </div>
 
@@ -36,7 +40,7 @@
 
       <!-- العنوان -->
       <div id="header">
-        <h2>مدرس البرمجة بالذكاء الاصطناعي</h2>
+        <h2>مدرّس البرمجة بالذكاء الاصطناعي</h2>
         <p>اسأل عن HTML، CSS، JavaScript، Python، Java، أو Swift.</p>
       </div>
 
@@ -44,12 +48,12 @@
       <div id="chatHistory" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
         <div id="initialMessage">
           <div class="bubble ai">
-            مرحباً! أنا مدرسك بالذكاء الاصطناعي. كيف أساعدك في مفاهيم الويب والبرمجة؟
+            مرحبًا! أنا مدرّسك بالذكاء الاصطناعي. كيف يمكنني مساعدتك في مفاهيم الويب والبرمجة؟
           </div>
         </div>
       </div>
 
-      <!-- إدخال الرسائل -->
+      <!-- إدخال المستخدم -->
       <div id="inputControls" style="padding: 10px; border-top: 1px solid #ccc;">
         <div id="inputWrapper" style="display: flex;">
           <input type="text" id="userInput" placeholder="اكتب سؤالك هنا..."
@@ -66,7 +70,7 @@
 
     </div>
 
-    <!-- منطق الجافاسكربت -->
+    <!-- منطق الذكاء الاصطناعي -->
     <script>
       const MODEL_NAME = 'gemini-2.5-flash-preview-09-2025';
       const apiKey = "AIzaSyCB5HJXCxiTUjJgEFHHa6CWo6iCOWjwKGg"; 
@@ -79,7 +83,7 @@
 
       const chatMessages = [];
 
-      // عرض الرسائل مع الكلاسات
+      // عرض الرسائل
       function renderMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sender);
@@ -97,9 +101,10 @@
       const initialMessageDiv = document.getElementById('initialMessage');
       if (initialMessageDiv) {
         initialMessageDiv.remove();
-        renderMessage("مرحباً! أنا مدرسك بالذكاء الاصطناعي. كيف أساعدك في مفاهيم الويب والبرمجة؟", 'ai');
+        renderMessage("مرحبًا! أنا مدرّسك بالذكاء الاصطناعي. كيف يمكنني مساعدتك في مفاهيم الويب والبرمجة؟", 'ai');
       }
 
+      // إعادة المحاولة مع تأخير
       async function fetchWithBackoff(payload, attempt = 0) {
         const maxRetries = 5;
         const delay = Math.pow(2, attempt) * 1000;
@@ -111,13 +116,15 @@
             body: JSON.stringify(payload)
           });
 
-          if (!response.ok && response.status === 429 && attempt < maxRetries) {
-            await new Promise(resolve => setTimeout(resolve, delay));
-            return fetchWithBackoff(payload, attempt + 1);
-          }
-
           if (!response.ok) {
-            throw new Error(`خطأ في API: ${response.statusText}`);
+            const errorText = await response.text();
+            console.error("خطأ في API:", response.status, errorText);
+
+            if (response.status === 429 && attempt < maxRetries) {
+              await new Promise(resolve => setTimeout(resolve, delay));
+              return fetchWithBackoff(payload, attempt + 1);
+            }
+            throw new Error(`خطأ API: ${response.statusText}`);
           }
 
           return response.json();
@@ -127,10 +134,11 @@
             await new Promise(resolve => setTimeout(resolve, delay));
             return fetchWithBackoff(payload, attempt + 1);
           }
-          throw new Error(`فشل بعد ${maxRetries} محاولة: ${error.message}`);
+          throw new Error(`فشل بعد ${maxRetries} محاولات: ${error.message}`);
         }
       }
 
+      // إرسال الرسالة
       async function sendMessage() {
         const query = userInput.value.trim();
         if (!query) return;
@@ -140,35 +148,34 @@
         sendButton.disabled = true;
         loadingIndicator.style.display = 'block';
 
-        chatMessages.push({ role: "user", parts: [{ text: query }] });
-
         const payload = {
-          contents: chatMessages,
+          contents: [{ role: "user", parts: [{ text: query }] }],
           systemInstruction: {
-            parts: [{ text: "أنت مدرس برمجة مساعد. كن موجزاً وركز على HTML، CSS، JavaScript، Python، Java، و Swift." }]
+            parts: [{ text: "أنت مدرّس برمجة مساعد. كن موجزًا وركز على HTML، CSS، JavaScript، Python، Java، و Swift." }]
           }
         };
 
         try {
           const result = await fetchWithBackoff(payload);
-          const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+          console.log("النتيجة الكاملة من API:", result);
+
+          const aiText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+          renderMessage(aiText || "عذرًا، لم أتلقَ ردًا صالحًا من النموذج.", 'ai');
 
           if (aiText) {
-            renderMessage(aiText, 'ai');
             chatMessages.push({ role: "model", parts: [{ text: aiText }] });
-          } else {
-            renderMessage("عذراً، لم أتلقَ استجابة صالحة من النموذج.", 'ai');
           }
 
         } catch (error) {
-          console.error("خطأ في API:", error);
-          renderMessage("خطأ: لم أتمكن من الاتصال بوكيل الذكاء الاصطناعي. تحقق من وحدة التحكم.", 'ai');
+          console.error("خطأ Gemini API:", error);
+          renderMessage("خطأ: لم أتمكن من الاتصال بوكيل الذكاء الاصطناعي. تحقق من وحدة التحكم للتفاصيل.", 'ai');
         } finally {
           sendButton.disabled = false;
           loadingIndicator.style.display = 'none';
         }
       }
 
+      // دعم زر الإدخال Enter
       userInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && !sendButton.disabled) {
           sendMessage();
